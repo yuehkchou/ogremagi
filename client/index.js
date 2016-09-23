@@ -1,12 +1,9 @@
 import React from 'react';
 import { render } from 'react-dom';
-import App from './components/App';
 
-class App extends React.Component {
-  render() {
-    return <p> Hello React! </p>;
+render(
+/* //passes down the store to the props */
+    <App />,
 
-  }
-}
-
-render(<App />, document.getElementById('root'))
+  document.getElementById('root')
+);
