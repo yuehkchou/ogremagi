@@ -1,8 +1,9 @@
 import React from 'react';
+import SurveyForm from './SurveyForm';
 
 const App = () => (
  <div>
-  Hi
+  <SurveyForm />
  </div>
 
 );
