@@ -16,8 +16,8 @@ class SurveyForm extends React.Component {
   }
 
   onFormSubmit(event){
-    event.preventDefault()
-    console.log(this.state.value)
+    event.preventDefault(); // prevents refreshing
+    console.log(this.state.value);
     this.setState({value: ''});
   }
 
