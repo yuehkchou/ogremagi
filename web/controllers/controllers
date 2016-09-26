@@ -1,0 +1,19 @@
+import axios;
+import db from './db.js';
+import router from express.Router()
+module.exports = {
+  survey: {
+    get: (req, res) => {
+      // let queryStr = 'select survey.id, '
+        db.select(*).from('bearTest');
+        .then(results => {
+          res.send(results);
+      })
+    },
+    post: (req, res) => {
+      console.log('#####REQBODY####', req.body);
+      let params = {id: req.body.id, price: req.body.price, pets: req.body.pets}
+      return db.insert(params).into('bearTest')
+    }
+  }
+}

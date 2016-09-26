@@ -4,6 +4,7 @@ import webpackDevMiddleware from 'webpack-dev-middleware'; //required to work wi
 import config from './webpack.config';
 import Express from 'express';
 import bodyParser from 'body-parser';
+import router from '../web/router';
 // import bodyParser from 'body-parser';
 
 
@@ -24,12 +25,8 @@ app.use(webpackDevMiddleware(compiler, {
 app.get('/', (req,res) => {
     res.sendFile(path.join(__dirname, 'index.html'))
 });
-// Post request
-app.post("/hello", function(req, res) {
-  res.setHeader('Content-Type', 'text/plain');
-  res.sendStatus(201);
-  res.send({ status: 'SUCCESS' });
-});
+// Handing backend routing
+app.use("/api", router);
 
 app.listen(port,error => {
     if (error) {

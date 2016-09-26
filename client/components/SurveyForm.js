@@ -1,5 +1,6 @@
 import React from 'react';
 import {FormGroup, FormControl, ControlLabel, Button, form} from 'react-bootstrap';
+import axios from 'axios';
 class SurveyForm extends React.Component {
   constructor() {
     super()
@@ -16,6 +17,14 @@ class SurveyForm extends React.Component {
   }
 
   onFormSubmit(event){
+    var data = {
+      value: this.state.value
+    }
+    axios.post('/api/userSurvey', { firstName: this.state.value, lastName: 'Bernardes' })
+    .then(function(response){
+      console.log('send successfully')
+    });
+
     event.preventDefault(); // prevents refreshing
     console.log(this.state.value);
     this.setState({value: ''});
