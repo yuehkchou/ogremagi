@@ -16,6 +16,6 @@ export function postSurveyAnswers(surveyAnswers){
  return {
    type: POST_SURVEY_RESPONSES,
    payload: postSurveyAnswers
- }
 
+ }
 }

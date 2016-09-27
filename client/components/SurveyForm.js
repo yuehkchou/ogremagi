@@ -22,16 +22,13 @@ class SurveyForm extends React.Component {
     this.setState(newState);
   }
 
-  onFormSubmit(event){
-    // var data = {
-    //   value: this.state.value
-    // }
+  onFormSubmit(event) {
     axios.post('/api/userSurvey', {
       address: this.state.address,
       brs: this.state.brs,
       price: this.state.price,
       amenity: this.state.amenity
-    }).then(function(response){
+    }).then((response) => {
       console.log('send successfully')
     });
 

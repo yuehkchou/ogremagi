@@ -13,7 +13,7 @@ module.exports = {
     },
     post: (req, res) => {
       console.log('#####REQBODY####', req.body);
-      let params = {id: req.body.id, price: req.body.price, pets: req.body.pets}
+      // let params = {id: req.body.id, price: req.body.price, pets: req.body.pets}
       db.insert({
         address: req.body.address,
         price: req.body.price,
