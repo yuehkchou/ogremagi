@@ -5,29 +5,39 @@ class SurveyForm extends React.Component {
   constructor() {
     super()
     // initialize state
-    this.state = {value: ''}; // sets the intiate state to value with an empty string
-    console.log();
+    this.state = {
+      address: '',
+      brs: '',
+      price: '',
+      amenity: '' }; // sets the intiate state to value with an empty string
 
     this.handleChange = this.handleChange.bind(this);  // When puting text inside the input field auto change
     this.onFormSubmit = this.onFormSubmit.bind(this); // When submit form, grab the form with something.
   }
 
-  handleChange(event) {
-    this.setState({value: event.target.value});
+  handleChange(name, event) {
+    // this.setState({address: event.target.value, price: event.target.price, brs: event.target.brs});
+    const newState = {}
+    newState[name] = event.target.value;
+    this.setState(newState);
   }
 
   onFormSubmit(event){
-    var data = {
-      value: this.state.value
-    }
-    axios.post('/api/userSurvey', { firstName: this.state.value, lastName: 'Bernardes' })
-    .then(function(response){
+    // var data = {
+    //   value: this.state.value
+    // }
+    axios.post('/api/userSurvey', {
+      address: this.state.address,
+      brs: this.state.brs,
+      price: this.state.price,
+      amenity: this.state.amenity
+    }).then(function(response){
       console.log('send successfully')
     });
 
     event.preventDefault(); // prevents refreshing
     console.log(this.state.value);
-    this.setState({value: ''});
+    this.setState({address: '', brs: '', price: '', amenity: ''});
   }
 
 
@@ -38,14 +48,50 @@ class SurveyForm extends React.Component {
       <form onSubmit={this.onFormSubmit}>
       <FormGroup>
         <ControlLabel> Hello World </ControlLabel>
+        <div>
+          <ControlLabel> I like the atomsphere and environment in this area? </ControlLabel>
+          <FormControl
+            type="text"
+            value={this.state.address}
 
-        <FormControl
-          type="text"
-          value={this.state.value}
+            placeholder="180 Trump Building"
+            onChange={this.handleChange.bind(this, 'address')}
+          />
+        </div>
+        <br />
+        <div>
+          <ControlLabel> I am looking for an apartment this big... </ControlLabel>
+          <FormControl
+            type="text"
+            value={this.state.brs}
 
-          placeholder="Enter text"
-          onChange={this.handleChange}
-        />
+            placeholder="studio"
+            onChange={this.handleChange.bind(this, 'brs')}
+          />
+        </div>
+        <br />
+        <div>
+          <ControlLabel> I am looking for housing in this price range... </ControlLabel>
+          <FormControl
+            type="integer"
+            value={this.state.price}
+
+            placeholder="1000"
+            onChange={this.handleChange.bind(this, 'price')}
+          />
+        </div>
+        <br />
+        <div>
+          <ControlLabel> It would be nice to have these... </ControlLabel>
+          <FormControl
+            type="text"
+            value={this.state.amenity}
+
+            placeholder="Gym, Rooftop, Common Room"
+            onChange={this.handleChange.bind(this, 'amenity')}
+          />
+        </div>
+        <br />
         <Button type="submit"> Submit </Button>
         </FormGroup>
         </form>

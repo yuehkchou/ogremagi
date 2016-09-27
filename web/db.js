@@ -1,4 +1,4 @@
-const config = require('./config')
+import config from './config.js'
 
 const db = require('knex')({
   client: 'mysql',
@@ -14,10 +14,20 @@ db.raw('select 1+1 as result').then(() => {
   console.log('you are connected');
 });
 
-db.schema.createTable('survey', (table) => {
-  table.increments('id');
-  table.string('address', 50);
-  table.string('rooms', 50);
-  table.integer('price', 50);
-  table.string('pets', 50);
+db.schema.hasTable('bearTest').then(function(exists){
+  if(!exists){
+    return db.schema.createTable('bearTest', function(answer) {
+      answer.increments('id').primary();
+      answer.string('address', 50);
+      answer.string('brs', 50);
+      answer.integer('price', 50);
+      
+      console.log('Created users table');
+    })
+    .catch(function(err){
+      console.error(err);
+    });
+  }
 })
+
+module.exports = db;

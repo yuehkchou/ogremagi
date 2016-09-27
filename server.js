@@ -4,7 +4,7 @@ import webpackDevMiddleware from 'webpack-dev-middleware'; //required to work wi
 import config from './webpack.config';
 import Express from 'express';
 import bodyParser from 'body-parser';
-import router from '../web/router';
+import router from './web/router';
 // import bodyParser from 'body-parser';
 
 
