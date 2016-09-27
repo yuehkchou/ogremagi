@@ -28,18 +28,20 @@ render() {
   return (
       <div>
         <h1> Title </h1>
-        <table>
+        <table class= 'table'>
           <thead>
             <tr>
-              <td> ID </td>
-              <td> Price</td>
-              <td> Bedrooms </td>
-              <td> Amenities</td>
-            </tr>
-            <tr>
-              <ul id='list'> </ul>
+              <th> ID </th>
+              <th> Price</th>
+              <th> Bedrooms </th>
+              <th> Amenities</th>
             </tr>
           </thead>
+          <tbody>
+            <tr>
+              <td id='list'> </td>
+            </tr>
+          </tbody>
         </table>
       </div>
     );
