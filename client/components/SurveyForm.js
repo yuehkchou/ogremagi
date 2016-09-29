@@ -1,24 +1,17 @@
-import React from 'react';
+import React, {Component, PropTypes} from 'react';
 import {FormGroup, FormControl, ControlLabel, Button, form} from 'react-bootstrap';
-import axios from 'axios';
-
+import {reduxForm, handleSubmit} from 'redux-form'
 // action import
-import { submitSurveyActions } from '../actions/submitSurveyActions';
+import { submitSurvey } from '../actions/submitSurveyActions';
 
 
 class SurveyForm extends React.Component {
-  constructor() {
-    super()
-    // initialize state
-    this.state = {
-      address: '',
-      brs: '',
-      price: '',
-      amenity: '' }; // sets the intiate state to value with an empty string
-
-    this.handleChange = this.handleChange.bind(this);  // When puting text inside the input field auto change
-    this.onFormSubmit = this.onFormSubmit.bind(this); // When submit form, grab the form with something.
+  static contextTypes = {
+    router: PropTypes.object
   }
+    // this.handleChange = this.handleChange.bind(this);  // When puting text inside the input field auto change
+    // this.onFormSubmit = this.onFormSubmit.bind(this); // When submit form, grab the form with something.
+
 
   handleChange(name, event) {
     // this.setState({address: event.target.value, price: event.target.price, brs: event.target.brs});
@@ -28,7 +21,7 @@ class SurveyForm extends React.Component {
   }
 
   onFormSubmit(data) {
-    this.props.submitSurveyActions(data)
+    this.props.submitSurvey(data)
       .then((response) => {
         console.log('send succesfully'. response );
       })
@@ -50,16 +43,16 @@ class SurveyForm extends React.Component {
 
 
   render() {
-    const { data: address, brs, price, amenity } = this.props;
+    const { fields: { address, brs, price, amenity }, handleSubmit } = this.props;
     return (
-      <form onSubmit={ handleSubmit(this.onFormSubmit(this)) }>
+      <form onSubmit={ handleSubmit(this.onFormSubmit.bind(this)) }>
       <FormGroup>
         <ControlLabel> Hello World </ControlLabel>
         <div>
           <ControlLabel> I like the atomsphere and environment in this area? </ControlLabel>
-          <FormControl
+          <input
             type="text"
-            value={this.state.address}
+            {...address}
 
             placeholder="180 Trump Building"
             onChange={this.handleChange.bind(this, 'address')}
@@ -68,9 +61,9 @@ class SurveyForm extends React.Component {
         <br />
         <div>
           <ControlLabel> I am looking for an apartment this big... </ControlLabel>
-          <FormControl
+          <input
             type="text"
-            value={this.state.brs}
+            {...brs}
 
             placeholder="studio"
             onChange={this.handleChange.bind(this, 'brs')}
@@ -79,9 +72,9 @@ class SurveyForm extends React.Component {
         <br />
         <div>
           <ControlLabel> I am looking for housing in this price range... </ControlLabel>
-          <FormControl
+          <input
             type="integer"
-            value={this.state.price}
+            {...price}
 
             placeholder="1000"
             onChange={this.handleChange.bind(this, 'price')}
@@ -90,9 +83,9 @@ class SurveyForm extends React.Component {
         <br />
         <div>
           <ControlLabel> It would be nice to have these... </ControlLabel>
-          <FormControl
+          <input
             type="text"
-            value={this.state.amenity}
+            {...amenity}
 
             placeholder="Gym, Rooftop, Common Room"
             onChange={this.handleChange.bind(this, 'amenity')}
@@ -106,9 +99,17 @@ class SurveyForm extends React.Component {
   }
 };
 
+function validate(values) {
+  const errors = {}
+  if(!values.price) errors.price = 'Please enter a valid name'
+  if(!values.brs) errors.brs = 'Please enter a password'
+  if(!values.amenity) errors.amenity = 'Please enter a password'
+  if(!values.address) errors.address = 'Please enter a password'
+  return errors
+}
 // ReactDOM.render(<FormExample />, mountNode);
 export default reduxForm({
   form: 'SurveyForm',
   fields: ['address', 'brs', 'price', 'amenity'],
   validate
-}, null, {submitSurveyActions} )(SurveyForm)
+}, null, {submitSurvey} )(SurveyForm)

@@ -31,7 +31,7 @@ render() {
   return (
       <div>
         <h1> Title </h1>
-        <table class= 'table'>
+        <table className = 'table'>
           <thead>
             <tr>
               <th> ID </th>

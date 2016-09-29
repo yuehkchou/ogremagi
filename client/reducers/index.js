@@ -6,7 +6,7 @@ import { reducer as formReducer } from 'redux-form';
 
 const rootReducer = combineReducers({
   form: formReducer,
-  survey: surveyReducer
+  userSurvey: surveyReducer
 });
 
 export default rootReducer;
