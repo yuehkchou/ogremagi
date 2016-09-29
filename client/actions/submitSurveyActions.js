@@ -5,12 +5,15 @@ export const SUBMIT_SURVEY = 'SUBMIT_SURVEY';
 const ROOT_URL ='http://localhost:3000/api';
 
 export function submitSurvey(data) {
-  const request = Axios.post('${ROOT_URL}/userSurvey', {
-    address: this.state.address,
-    brs: this.state.brs,
-    price: this.state.price,
-    amenity: this.state.amenity
-  })
+  console.log('#####sentData#####', data)
+  const request = Axios.post(ROOT_URL + '/userSurvey',
+  {
+    address: data.address,
+    brs: data.brs,
+    price: data.price,
+    amenity: data.amenity
+  }
+)
 
   return {
     type: SUBMIT_SURVEY,

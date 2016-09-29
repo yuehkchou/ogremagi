@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import SurveyForm from './SurveyForm';
 import SurveyChart from './SurveyChart';
 
-class App extends React.Component{
+class App extends Component{
   constructor(){
     super()
   }
@@ -10,8 +10,8 @@ class App extends React.Component{
   render(){
     return (
      <div>
-      <SurveyForm />
-      <SurveyChart />
+       <SurveyForm />
+       <SurveyChart />
      </div>
    );
   }

@@ -4,9 +4,10 @@ import { GET_SURVEY } from '../actions/getSurveyActions'
 
 const INITIAL_STATE = { all: [], userSurvey: null }
 
-export default function(state = INITIAL_STATE, action){
+export default function(state = [], action){
   switch(action.type) {
     case SUBMIT_SURVEY:
+    console.log('###ACTUINPAYLOAD###', action.payload)
       return {...state, all: action.payload.data }
     default:
       return state;
