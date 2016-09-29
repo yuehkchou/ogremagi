@@ -1,5 +1,7 @@
 import React from 'react';
-import axios from 'axios';
+import Axios from 'axios';
+import {FormGroup, FormControl, ControlLabel, Button, form} from 'react-bootstrap';
+
 
 class SurveyChart extends React.Component {
   constructor() {
@@ -8,19 +10,20 @@ class SurveyChart extends React.Component {
     }
 
 loadSurveyInfo(){
-  axios.get('/api/userSurvey')
+  Axios.get('/api/userSurvey')
   .then((response) => {
-    document.getElementById('list').innerHTML = response.data.map((room) => {
-      return(
-        '<strong>' + room.id + '</strong>'  +
-        '<strong>' + room.price + '</strong>' +
-        '<strong>' + room.brs + '</strong>' +
-        '<strong>' + room.amenity + '</strong>'
+    response.data.map((room) => {
+      console.log('Get info request')
+      console.log(response.status)
+      console.log(response.data)
+      return (
+        <div>
+          <td> room.id </td>
+          <td> room.price </td>
+          <td> room.amenities </td>
+        </div>
       )
     })
-    console.log('Get info request')
-    console.log(response.status)
-    console.log(response.data)
   })
 }
 

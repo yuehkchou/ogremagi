@@ -4,7 +4,7 @@ import SurveyChart from './SurveyChart';
 
 const App = () => (
  <div>
-  // <SurveyForm />
+  <SurveyForm />
   <SurveyChart />
  </div>
 

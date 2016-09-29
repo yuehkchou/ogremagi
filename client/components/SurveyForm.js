@@ -1,6 +1,11 @@
 import React from 'react';
 import {FormGroup, FormControl, ControlLabel, Button, form} from 'react-bootstrap';
 import axios from 'axios';
+
+// action import
+import { submitSurveyActions } from '../actions/submitSurveyActions';
+
+
 class SurveyForm extends React.Component {
   constructor() {
     super()
@@ -22,27 +27,32 @@ class SurveyForm extends React.Component {
     this.setState(newState);
   }
 
-  onFormSubmit(event) {
-    axios.post('/api/userSurvey', {
-      address: this.state.address,
-      brs: this.state.brs,
-      price: this.state.price,
-      amenity: this.state.amenity
-    }).then((response) => {
-      console.log('send successfully')
-    });
-
-    event.preventDefault(); // prevents refreshing
-    console.log(this.state.value);
-    this.setState({address: '', brs: '', price: '', amenity: ''});
+  onFormSubmit(data) {
+    this.props.submitSurveyActions(data)
+      .then((response) => {
+        console.log('send succesfully'. response );
+      })
+    // axios.post('/api/userSurvey', {
+    //   address: this.state.address,
+    //   brs: this.state.brs,
+    //   price: this.state.price,
+    //   amenity: this.state.amenity
+    // }).then((response) => {
+    //   console.log('send successfully')
+    // });
+    //
+    // event.preventDefault(); // prevents refreshing
+    // console.log(this.state.value);
+    // this.setState({address: '', brs: '', price: '', amenity: ''});
   }
 
 
 
 
   render() {
+    const { data: address, brs, price, amenity } = this.props;
     return (
-      <form onSubmit={this.onFormSubmit}>
+      <form onSubmit={ handleSubmit(this.onFormSubmit(this)) }>
       <FormGroup>
         <ControlLabel> Hello World </ControlLabel>
         <div>
@@ -97,4 +107,8 @@ class SurveyForm extends React.Component {
 };
 
 // ReactDOM.render(<FormExample />, mountNode);
-export default SurveyForm;
+export default reduxForm({
+  form: 'SurveyForm',
+  fields: ['address', 'brs', 'price', 'amenity'],
+  validate
+}, null, {submitSurveyActions} )(SurveyForm)
