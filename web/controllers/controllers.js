@@ -1,6 +1,5 @@
 
 import db from '../db.js';
-// import router from express.Router();
 import express from 'express';
 module.exports = {
   survey: {

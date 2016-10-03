@@ -14,8 +14,8 @@ loadSurveyInfo(){
   .then((response) => {
     response.data.map((room) => {
       console.log('Get info request')
-      console.log(response.status)
-      console.log(response.data)
+      // console.log(response.status)
+      // console.log(response.data)
       return (
         <div>
           <td> room.id </td>
